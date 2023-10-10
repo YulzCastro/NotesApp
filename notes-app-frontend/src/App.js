@@ -15,7 +15,7 @@ function App() {
         <Routes>
           <Route exact path="/" element={<LandingPage />} />
           <Route exact path="/login" element={<LoginPage />} />
-          <Route exact path="/viewNotas" element={<ViewNotas />} />
+          <Route exact path="/viewnotas" element={<ViewNotas />} />
         </Routes>
       </main>
     </div>
