@@ -1,3 +1,5 @@
+import { ViewNotas } from "./ViewNotes"
+
 export function LandingPage() {
-    return <div>esta en principal</div>
+    return <ViewNotas />
 }
