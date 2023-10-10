@@ -30,6 +30,7 @@ router.post('/register', async (req, res) => {
 
 // Ruta para iniciar sesión y obtener un token JWT
 router.post('/login', async (req, res) => {
+ 
   try {
     // Buscar al usuario por su correo electrónico
     const user = await User.findOne({ email: req.body.email });
@@ -47,8 +48,9 @@ router.post('/login', async (req, res) => {
 
     // Generar un token JWT y enviarlo como respuesta
     const token = jwt.sign({ userId: user._id }, 'secreto', { expiresIn: '1h' });
+    const username = user.username;
 
-    res.json({ token });
+    res.json({ token: token, username:username  });
   } catch (error) {
     res.status(500).json({ error: 'Error al iniciar sesión' });
   }
