@@ -31,7 +31,7 @@ export function LoginPage() {
                 },
                 body: JSON.stringify(values)
             }
-            let res = await fetch('http://192.168.1.15:3000/auth/login', config);
+            let res = await fetch('https://notes-app-backend-67f2.onrender.com/auth/login', config);
             let json = await res.json()
             console.log(json)
             values.token = json.token;

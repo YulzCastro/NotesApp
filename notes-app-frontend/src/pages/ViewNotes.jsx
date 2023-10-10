@@ -34,7 +34,7 @@ export function ViewNotas() {
         }
 
         if (values.token) {
-            fetch("http://192.168.1.15:3000/notes/", config)
+            fetch("https://notes-app-backend-67f2.onrender.com/notes/", config)
                 .then((result) => result.json())
                 .then(data => {
                     SetNotas(data)
