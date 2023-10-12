@@ -59,6 +59,16 @@ router.post('/login', async (req, res) => {
   }
 });
 
+router.get('/verifyToken', verifyToken, async (req, res) => {
+
+  try {
+    res.json("ok");
+  } catch (error) {
+    res.status(500).json({ error});
+  }
+})
+
+
 // Ruta para obtener el perfil del usuario (requiere autenticación)
 router.get('/profile', (req, res) => {
   res.json({ user: req.user }); // req.user contiene la información del usuario autenticado
