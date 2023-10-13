@@ -15,7 +15,7 @@ export default function Login() {
     const goTo = useNavigate()
 
     if (auth.isAuthenticated) {
-        return <Navigate to="/dashboard"/>
+        return <Navigate to="/dashboard" />
     }
 
     async function handleSubmit(e) {
@@ -35,12 +35,8 @@ export default function Login() {
 
             if (response.ok) {
                 setErrorResponse("")
-                
                 const json = (await response.json())
-                console.log(json)
-
-                if(json.token)
-                {
+                if (json.token) {
                     auth.saveUser(json)
                     goTo("/dashboard")
                 }

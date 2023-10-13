@@ -8,6 +8,7 @@ import Login from './routes/login.jsx'
 import Signup from './routes/signup.jsx'
 import ProtectedRoute from './routes/ProtectedRoute.jsx'
 import { AutoProvider } from './auth/AuthProvider.jsx'
+import CreateNote from './routes/createnote.jsx'
 
 const router = createBrowserRouter([
   {
@@ -25,6 +26,16 @@ const router = createBrowserRouter([
       {
         path: "/dashboard",
         element: <Dashboard />
+      }
+    ]
+  },
+  {
+    path: "/create",
+    element: <ProtectedRoute />,
+    children: [
+      {
+        path: "/create",
+        element: <CreateNote />
       }
     ]
   }

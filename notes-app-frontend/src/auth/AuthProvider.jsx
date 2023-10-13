@@ -6,25 +6,28 @@ const AuthContext = createContext({
     getAccessToken: () => { },
     saveUser: (userData) => { },
     getRefreshToken: () => { },
-    getUser: () => { },
+    //getUser: () => {},
+    signout: () => {},
 })
 
 export function AutoProvider({ children }) {
 
     const [isAuthenticated, setAuthenticated] = useState(false)
     const [accessToken, setAccessToken] = useState("");
-    const [user, setUser] = useState([]);
-    
+    const [isLoading, setIsLoading] = useState(true);
 
+      
     async function checkAuth() {
         const accessTokenLocal = window.localStorage.getItem('token')
         setAccessToken(JSON.parse(accessTokenLocal));
         const verifyTokenGood = await verifyToken(JSON.parse(accessTokenLocal));
         if (verifyTokenGood === "ok") {
             setAuthenticated(true);
+            setIsLoading(false)
         } else {
             setAuthenticated(false);
         }
+        setIsLoading(false)
     }
 
     async function verifyToken(accessToken) {
@@ -40,26 +43,18 @@ export function AutoProvider({ children }) {
 
                 if (response.ok) {
                     const json = await response.json();
+                    setAuthenticated(true);
                     return json;
                 }
             } catch (error) { console.log(error) }
         } else {
-            console.log("no tenia token")
+            setAuthenticated(false);
+            setIsLoading(false)
         }
     }
 
-    useEffect(() => {
-        checkAuth();
-    }, []);
-
     function getAccessToken() {
         return accessToken;
-    }
-
-    function getUser() {
-        const DataUser = window.localStorage.getItem('user')
-        setUser(DataUser);
-        return user.username;
     }
 
     function getRefreshToken() {
@@ -71,18 +66,29 @@ export function AutoProvider({ children }) {
         return null;
     }
 
-    function saveUser(userData) { 
-        
+    function saveUser(userData) {
+
         setAccessToken(userData.token)
-        
+
         localStorage.setItem("token", JSON.stringify(userData.token));
         localStorage.setItem("user", JSON.stringify(userData.username));
-        
+
         setAuthenticated(true);
     }
 
-    return <AuthContext.Provider value={{ isAuthenticated, getAccessToken, saveUser, getRefreshToken, getUser }}>
-        {children}
+    function signout() {
+        localStorage.removeItem("token");
+        localStorage.removeItem("user");
+        setAccessToken("");
+        setAuthenticated(false);
+    }
+
+    useEffect(() => {
+        checkAuth();
+    }, []);
+
+    return <AuthContext.Provider value={{ isAuthenticated, getAccessToken, saveUser, getRefreshToken, signout }}>
+        {isLoading ? <div>Loading...</div> : children}
     </AuthContext.Provider>
 
 }
