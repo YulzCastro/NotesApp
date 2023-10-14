@@ -44,9 +44,12 @@ export function AutoProvider({ children }) {
                 if (response.ok) {
                     const json = await response.json();
                     setAuthenticated(true);
+                    setIsLoading(true)
                     return json;
                 }
-            } catch (error) { console.log(error) }
+            } catch (error) { 
+                setIsLoading(false) 
+            }
         } else {
             setAuthenticated(false);
             setIsLoading(false)

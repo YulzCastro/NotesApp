@@ -51,30 +51,33 @@ export default function Signup() {
     }
 
     return (<DefaultLayout>
-        <form className="form" onSubmit={handleSubmit}>
-            <h1>Signup</h1>
-            {!!errorResponse && <div className="errorMessage">{errorResponse}</div>}
-            <label>Username</label>
-            <input
-                type="text"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-            />
+        <div className="content-form">
+            <form className="form" onSubmit={handleSubmit}>
+                <h1>Signup</h1>
+                {!!errorResponse && <div className="errorMessage">{errorResponse}</div>}
+                <label>Username</label>
+                <input
+                    type="text"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                />
 
-            <label>Email</label>
-            <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-            />
+                <label>Email</label>
+                <input
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                />
 
-            <label>Password</label>
-            <input
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-            />
-            <button>Create User</button>
-        </form>
+                <label>Password</label>
+                <input
+                    type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                />
+                <button>Create User</button>
+            </form>
+        </div>
+
     </DefaultLayout>)
 }

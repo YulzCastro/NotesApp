@@ -68,27 +68,28 @@ export default function CreateNote() {
 
     return (
         <PortalLayout>
-            <form className="form" onSubmit={handleSubmit}>
-                <h1>Crear Nota</h1>
-                {!!errorResponse && <div className="errorMessage">{errorResponse}</div>}
-                <label>Tititulo</label>
-                <input
-                    type="text"
-                    value={title}
-                    size="10"
-                    onChange={(e) => setTitle(e.target.value)}
-                />
+            <div className="content-form">
+                <form className="form" onSubmit={handleSubmit}>
+                    <h1>Crear Nota</h1>
+                    {!!errorResponse && <div className="errorMessage">{errorResponse}</div>}
+                    <label>Titulo</label>
+                    <input
+                        type="text"
+                        value={title}
+                        size="10"
+                        onChange={(e) => setTitle(e.target.value)}
+                    />
 
-                <label>Detalle</label>
-                <textarea 
-                    type="text"
-                    value={content}
-                    cols="51"
-                    rows="8"
-                    onChange={(e) => setContent(e.target.value)}
-                />
-                <button>Crear Nota</button>
-            </form>
+                    <label>Detalle</label>
+                    <textarea
+                        type="text"
+                        value={content}
+ 
+                        onChange={(e) => setContent(e.target.value)}
+                    />
+                    <button>Crear Nota</button>
+                </form>
+            </div>
         </PortalLayout>
     )
 }

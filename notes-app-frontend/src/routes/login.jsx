@@ -10,6 +10,7 @@ export default function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [errorResponse, setErrorResponse] = useState();
+    const [isLoading, setIsLoading] = useState(true);
 
     const auth = useAuth()
     const goTo = useNavigate()
@@ -20,6 +21,7 @@ export default function Login() {
 
     async function handleSubmit(e) {
         e.preventDefault();
+        
         try {
             const response = await fetch(`${API_URL}/auth/login`, {
                 method: "POST",
@@ -52,24 +54,24 @@ export default function Login() {
     }
 
     return (<DefaultLayout>
-        <form className="form" onSubmit={handleSubmit}>
-            <h1>Login</h1>
-            {!!errorResponse && <div className="errorMessage">{errorResponse}</div>}
-            <label>Email</label>
-            <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-            />
-
-            <label>Password</label>
-            <input
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-            />
-
-            <button>Login</button>
-        </form>
+        <div className="content-form">
+            <form className="form" onSubmit={handleSubmit}>
+                <h1>Login</h1>
+                {!!errorResponse && <div className="errorMessage">{errorResponse}</div>}
+                <label>Email</label>
+                <input
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                />
+                <label>Password</label>
+                <input
+                    type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                />
+                <button>Login</button>
+            </form>
+        </div>
     </DefaultLayout>)
 }
